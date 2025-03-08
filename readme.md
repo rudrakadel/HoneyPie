@@ -15,8 +15,8 @@ An interactive SSH honeypot designed to trap malicious attackers by simulating a
 
 ### **1️⃣ Clone the Repository**  
 ```sh
-git clone https://github.com/yourusername/honeypot.git
-cd honeypot
+git clone https://github.com/rudrakadel/HoneyPie.git
+cd HoneyPie
 ```
 
 ### **2️⃣ Install Dependencies**  
@@ -44,7 +44,7 @@ python ssh_honeypot.py
 ```
 
 ### **Connect to the Honeypot** (for testing)  
-In another terminal, try connecting using SSH:  
+In another terminal on Ubuntu OR any other Linux distro, try connecting using SSH:  
 ```sh
 ssh -p 2222 admin@127.0.0.1
 ```
@@ -79,7 +79,7 @@ Example log entries:
 [INFO] 192.168.1.10 attempted login with username: admin, password: 1234
 [INFO] 192.168.1.10 executed command: cat password_config
 ```
-
+This code can be further formatted to add more server comamands like "ls -alps" while being deployed in real world to make the honeypot look more realistic to the hacker or intruder even add bash commands for wrong or mispelled commands given in the terminal.
 ---
 
 ## **⚠️ Disclaimer**  
