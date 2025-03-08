@@ -1,5 +1,3 @@
-Here’s the **README.md** file with proper Markdown code formatting:  
-
 ```md
 # **Funnel SSH Honeypot 🛡️**  
 
