@@ -1,4 +1,3 @@
-
 # **Funnel SSH Honeypot 🛡️**  
 
 An interactive SSH honeypot designed to trap malicious attackers by simulating a vulnerable SSH server. It logs login attempts, captures commands executed by attackers, and provides a fake shell environment to monitor their activities.  
@@ -15,21 +14,21 @@ An interactive SSH honeypot designed to trap malicious attackers by simulating a
 ## **🛠️ Installation**  
 
 ### **1️⃣ Clone the Repository**  
-```md
+```sh
 git clone https://github.com/yourusername/honeypot.git
 cd honeypot
-```sh
+```
 
 ### **2️⃣ Install Dependencies**  
 Create a virtual environment and install required Python packages:  
-```md
+```sh
 python -m venv honeypot_env
 source honeypot_env/bin/activate  # On Windows, use `honeypot_env\Scripts\activate`
 pip install -r requirements.txt
-```sh
+```
 
 ### **3️⃣ Generate SSH Keys**  
-If you don’t have SSH keys in the `static/` folder, generate them:  
+If you don't have SSH keys in the `static/` folder, generate them:  
 ```sh
 ssh-keygen -t rsa -b 2048 -f static/server.key -N ""
 ```
@@ -89,7 +88,4 @@ This project is for **educational and research purposes only**. Deploying this h
 ---
 
 ## **👨‍💻 Author**  
-Developed by **Rudra Kadel** – Cybersecurity Enthusiast 🔥  
-```
-
-This will work perfectly as your **README.md** file. Let me know if you need any modifications! 🚀
+Developed by **Rudra Kadel** – Cybersecurity Enthusiast 🔥
