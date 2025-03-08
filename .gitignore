@@ -1,0 +1,16 @@
+# Ignore the environment folder
+honeypot_env/
+
+# Ignore the static folder (contains sensitive keys)
+static/
+
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+.env/
