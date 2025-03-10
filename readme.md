@@ -1,91 +1,165 @@
-# **Funnel SSH Honeypot 🛡️**  
+# HoneyPie 🍯
 
-An interactive SSH honeypot designed to trap malicious attackers by simulating a vulnerable SSH server. It logs login attempts, captures commands executed by attackers, and provides a fake shell environment to monitor their activities.  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-## **🚀 Features**  
-- **SSH Authentication Capture** – Logs all login attempts, including usernames and passwords.  
-- **Fake Shell Environment** – Mimics a real Linux shell to deceive attackers.  
-- **Command Logging** – Records executed commands in a structured format.  
-- **Custom Fake Files** – Provides misleading files (e.g., `password_config`) to lure attackers.  
-- **Tarpit Mode (Optional)** – Slows down attackers by delaying responses.  
+A Python-based honeypot security project designed to deceive, log, and analyze unauthorized attackers and bots attempting to compromise a system.
 
----
+## 📋 Overview
 
-## **🛠️ Installation**  
+HoneyPie mimics a vulnerable machine by providing fake SSH and HTTP services, allowing security researchers to monitor attacker behavior in a controlled environment. The project helps understand attack patterns, collect threat intelligence, and enhance security posture.
 
-### **1️⃣ Clone the Repository**  
+### Key Features
+
+* **SSH Honeypot:** A fake SSH server that logs brute-force login attempts and executed commands
+* **HTTP Honeypot:** A fake WordPress admin login page that captures attacker credentials and logs unauthorized access attempts
+* **Logging & Analysis:** Stores attacker data, including IP addresses, credentials, and command execution history
+* **Tarpit Mode:** Slows down attackers to waste their resources and discourage automated attacks
+* **Web Dashboard (Optional):** A web-based UI for visualizing attack trends and analyzing collected data
+
+## 🛠️ Technologies
+
+HoneyPie is built using the following technologies and libraries:
+
+| Component | Technology Used |
+|-----------|----------------|
+| **Programming Language** | Python (3.8+) |
+| **SSH Honeypot** | Paramiko (SSH server emulation) |
+| **HTTP Honeypot** | Flask (Fake WordPress Admin Panel) |
+| **Logging & Storage** | JSON and log files |
+| **Web Dashboard** | Flask + HTML/CSS (for data visualization) |
+| **Security Analysis** | Attack logging, IP tracking |
+| **Environment Management** | Virtual environment using `venv` |
+
+## 🚀 Installation
+
+To install and run HoneyPie, follow these steps:
+
+### 1️⃣ Clone the Repository
+
 ```sh
 git clone https://github.com/rudrakadel/HoneyPie.git
 cd HoneyPie
 ```
 
-### **2️⃣ Install Dependencies**  
-Create a virtual environment and install required Python packages:  
+### 2️⃣ Set Up a Virtual Environment
+
 ```sh
 python -m venv honeypot_env
-source honeypot_env/bin/activate  # On Windows, use `honeypot_env\Scripts\activate`
+source honeypot_env/bin/activate  # Linux/Mac
+honeypot_env\Scripts\activate  # Windows
+```
+
+### 3️⃣ Install Dependencies
+
+```sh
 pip install -r requirements.txt
 ```
 
-### **3️⃣ Generate SSH Keys**  
-If you don't have SSH keys in the `static/` folder, generate them:  
+### 4️⃣ Generate SSH Keys (For SSH Honeypot)
+
 ```sh
 ssh-keygen -t rsa -b 2048 -f static/server.key -N ""
 ```
 
----
+### 5️⃣ Run the Honeypot
 
-## **🚀 Usage**  
+#### SSH Honeypot (Fake SSH Server)
 
-### **Start the SSH Honeypot**  
-Run the honeypot on port **2222**:  
 ```sh
-python ssh_honeypot.py
+python honeypy.py -a 127.0.0.1 -p 2222 -u admin -w password --ssh
 ```
 
-### **Connect to the Honeypot** (for testing)  
-In another terminal on Ubuntu OR any other Linux distro, try connecting using SSH:  
+#### HTTP Honeypot (Fake Admin Panel)
+
 ```sh
-ssh -p 2222 admin@127.0.0.1
+python honeypy.py -a 127.0.0.1 -p 5000 --http
 ```
 
----
+#### Web Dashboard (Optional - Attack Logs Visualization)
 
-## **📁 Folder Structure**  
 ```sh
-honeypot/
-│── honeypot_env/       # Virtual environment (ignored in Git)
-│── log_files/          # Stores audit logs
-│   ├── audits.log      # Stores login attempts
-│   ├── funnel.log      # Stores executed commands
-│── static/             # Stores SSH keys (ignored in Git)
-│   ├── server.key      
-│   ├── server.key.pub
-│── ssh_honeypot.py     # Main honeypot script
-│── requirements.txt    # Dependencies
-│── README.md           # Documentation
-│── .gitignore          # Ignore unnecessary files
+python web_app.py
 ```
 
----
+Then open `http://127.0.0.1:5000` in your browser.
 
-## **📜 Logging & Monitoring**  
+## ⚙️ Requirements
 
-- **Credential Logs (`audits.log`)** – Captures attacker IP, username, and password in a readable format.  
-- **Command Logs (`funnel.log`)** – Logs all executed commands and responses.  
+### System Requirements
 
-Example log entries:  
+- ✅ Python 3.8+
+- ✅ Linux/macOS/Windows environment (preferably a VM or isolated system)
+
+### Python Dependencies (installed via `requirements.txt`)
+
+- `paramiko` (SSH server emulation)
+- `flask` (Web honeypot & dashboard)
+- `requests` (HTTP request handling)
+- `json` (For logging attack data)
+
+To install all dependencies, run:
+
 ```sh
-[INFO] 192.168.1.10 attempted login with username: admin, password: 1234
-[INFO] 192.168.1.10 executed command: cat password_config
+pip install -r requirements.txt
 ```
-This code can be further formatted to add more server comamands like "ls -alps" while being deployed in real world to make the honeypot look more realistic to the hacker or intruder even add bash commands for wrong or mispelled commands given in the terminal.
+
+## ⚠️ Usage Warnings
+
+- **DO NOT** run HoneyPie on production systems or personal machines
+- Always deploy in isolated environments (VM, container, etc.)
+- Use at your own risk and responsibility
+- Always follow local laws and regulations regarding honeypot deployment
+
+## 👥 Contributing
+
+### 🔧 Contribution Guidelines
+
+Developers and security enthusiasts can contribute by:
+
+- **Reporting Issues:** Submit bug reports and security flaws in GitHub Issues
+- **Enhancing Features:** Improve logging, add new protocols, or integrate AI-based attack detection
+- **Submitting Pull Requests (PRs):** Fork the repository, make changes, and create a PR with clear descriptions
+- **Improving Documentation:** Help refine the README and add tutorial guides
+
+### 💡 Steps to Contribute
+
+1. **Fork the Repository**
+   ```sh
+   git clone https://github.com/rudrakadel/HoneyPie.git
+   cd HoneyPie
+   ```
+
+2. **Create a New Branch**
+   ```sh
+   git checkout -b feature-branch
+   ```
+
+3. **Make Changes & Test**
+   Modify code and ensure proper functionality.
+
+4. **Commit & Push**
+   ```sh
+   git add .
+   git commit -m "Added new feature"
+   git push origin feature-branch
+   ```
+
+5. **Submit a Pull Request** on GitHub.
+
+## 📜 License
+
+HoneyPie is licensed under the **MIT License**, which allows:
+- ✅ Free usage and distribution
+- ✅ Modifications and commercial use
+- ✅ Open-source contributions
+
+Check the full license details in the **LICENSE** file.
+
+## 📞 Contact
+
+For questions, feedback, or collaboration, please open an issue on GitHub or contact the me through Linkedin(https://www.linkedin.com/in/rudra-kadel-1084b6249).
+
 ---
 
-## **⚠️ Disclaimer**  
-This project is for **educational and research purposes only**. Deploying this honeypot on a public server may violate laws and regulations in your region. Always get proper authorization before using it outside of a controlled environment.  
-
----
-
-## **👨‍💻 Author**  
-Developed by **Rudra Kadel** – Cybersecurity Enthusiast 🔥
+**Note:** This project is intended for educational and defensive security research purposes only.
