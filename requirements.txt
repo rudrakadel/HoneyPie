@@ -4,3 +4,4 @@ paramiko==3.4.0
 plotly==5.23.0
 python-dotenv==1.0.1
 requests==2.32.3
+argparse==1.4.0
